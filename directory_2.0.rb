@@ -16,7 +16,7 @@ def input_students
     hobby = gets.chomp
 
     students.push({name: name, country_of_birth: country_of_birth, hobby: hobby, cohort: :november})
-    puts "Now we have #{students.count} students"
+    puts ("Now we have #{students.count} students").center(10)
   end
 
   students
