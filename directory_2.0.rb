@@ -35,8 +35,17 @@ def print_header
 end
 
 def print_names(array)
+  puts "Which letter would you like to search for?"
+  letter = gets.chomp.downcase
+
   array.each_with_index do |hash, i|
-    if hash[:name].start_with?("d")
+    name_first_letter = (hash[:name])[0].downcase
+
+    if letter == name_first_letter
+      puts "#{i + 1} #{hash[:name]} (#{hash[:cohort]} cohort)"
+    end
+
+    if letter.empty?
       puts "#{i + 1} #{hash[:name]} (#{hash[:cohort]} cohort)"
     end
   end
