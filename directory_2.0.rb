@@ -35,8 +35,8 @@ def print_header
 end
 
 def print_names(array)
-  array.each do |hash|
-    puts "#{hash[:name]} (#{hash[:cohort]} cohort)"
+  array.each_with_index do |hash, i|
+    puts "#{i + 1} #{hash[:name]} (#{hash[:cohort]} cohort)"
   end
 end
 
