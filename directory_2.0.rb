@@ -1,15 +1,22 @@
 def input_students
-  puts "Please, enter the name of the student"
-  puts "To finish, just hit return twice"
 
   students = []
 
-  name = gets.chomp
-
-  while !name.empty? do
-    students << {name: name, cohort: :november}
-    puts "Now we have #{students.count} students"
+  while true
+    puts "Please, enter the name of the student"
+    puts "To finish, just hit return twice"
     name = gets.chomp
+
+    break if name.empty?
+
+    puts "Please, enter the student's country of birth"
+    country_of_birth = gets.chomp
+
+    puts "Please, enter the student's hobby"
+    hobby = gets.chomp
+
+    students.push({name: name, country_of_birth: country_of_birth, hobby: hobby, cohort: :november})
+    puts "Now we have #{students.count} students"
   end
 
   students
@@ -38,25 +45,19 @@ def print_names(array)
   puts "Which letter would you like to search for?"
   letter = gets.chomp.downcase
 
-  i = 0 
-  while i <= array.length - 1
-    puts "#{i + 1} #{array[i][:name]} (#{array[i][:cohort]} cohort)"
-    i += 1
+  array.each_with_index do |hash, i|
+    name_first_letter = (hash[:name])[0].downcase
+
+    if hash[:name].length < 12
+      if letter == name_first_letter
+        puts "#{i + 1} #{(hash[:name]).capitalize}, country of birth: #{(hash[:country_of_birth].capitalize)} (#{hash[:cohort]} cohort)"
+      end
+
+      if letter.empty?
+        puts "#{i + 1} #{(hash[:name]).capitalize}, country of birth: #{(hash[:country_of_birth].capitalize)} (#{hash[:cohort]} cohort)"
+      end
+    end
   end
-
-  # array.each_with_index do |hash, i|
-  #   name_first_letter = (hash[:name])[0].downcase
-
-  #   if hash[:name].length < 12
-  #     if letter == name_first_letter
-  #       puts "#{i + 1} #{hash[:name]} (#{hash[:cohort]} cohort)"
-  #     end
-
-  #     if letter.empty?
-  #       puts "#{i + 1} #{hash[:name]} (#{hash[:cohort]} cohort)"
-  #     end
-  #   end
-  # end
 end
 
 def print_footer(hash)
