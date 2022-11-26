@@ -36,7 +36,9 @@ end
 
 def print_names(array)
   array.each_with_index do |hash, i|
-    puts "#{i + 1} #{hash[:name]} (#{hash[:cohort]} cohort)"
+    if hash[:name].start_with?("d")
+      puts "#{i + 1} #{hash[:name]} (#{hash[:cohort]} cohort)"
+    end
   end
 end
 
