@@ -38,19 +38,25 @@ def print_names(array)
   puts "Which letter would you like to search for?"
   letter = gets.chomp.downcase
 
-  array.each_with_index do |hash, i|
-    name_first_letter = (hash[:name])[0].downcase
-
-    if hash[:name].length < 12
-      if letter == name_first_letter
-        puts "#{i + 1} #{hash[:name]} (#{hash[:cohort]} cohort)"
-      end
-
-      if letter.empty?
-        puts "#{i + 1} #{hash[:name]} (#{hash[:cohort]} cohort)"
-      end
-    end
+  i = 0 
+  while i <= array.length - 1
+    puts "#{i + 1} #{array[i][:name]} (#{array[i][:cohort]} cohort)"
+    i += 1
   end
+
+  # array.each_with_index do |hash, i|
+  #   name_first_letter = (hash[:name])[0].downcase
+
+  #   if hash[:name].length < 12
+  #     if letter == name_first_letter
+  #       puts "#{i + 1} #{hash[:name]} (#{hash[:cohort]} cohort)"
+  #     end
+
+  #     if letter.empty?
+  #       puts "#{i + 1} #{hash[:name]} (#{hash[:cohort]} cohort)"
+  #     end
+  #   end
+  # end
 end
 
 def print_footer(hash)
