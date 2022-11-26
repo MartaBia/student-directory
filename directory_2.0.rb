@@ -41,12 +41,14 @@ def print_names(array)
   array.each_with_index do |hash, i|
     name_first_letter = (hash[:name])[0].downcase
 
-    if letter == name_first_letter
-      puts "#{i + 1} #{hash[:name]} (#{hash[:cohort]} cohort)"
-    end
+    if hash[:name].length < 12
+      if letter == name_first_letter
+        puts "#{i + 1} #{hash[:name]} (#{hash[:cohort]} cohort)"
+      end
 
-    if letter.empty?
-      puts "#{i + 1} #{hash[:name]} (#{hash[:cohort]} cohort)"
+      if letter.empty?
+        puts "#{i + 1} #{hash[:name]} (#{hash[:cohort]} cohort)"
+      end
     end
   end
 end
