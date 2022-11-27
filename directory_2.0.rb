@@ -45,26 +45,32 @@ def print_header
 end
 
 def print_names(array)
-  puts "Which letter would you like to search for?"
-  letter = gets.chomp.downcase
+  if !array.empty?
+    puts "Which letter would you like to search for?"
+    letter = gets.chomp.downcase
 
-  array.each_with_index do |hash, i|
-    name_first_letter = (hash[:name])[0].downcase
+    array.each_with_index do |hash, i|
+      name_first_letter = (hash[:name])[0].downcase
 
-    if hash[:name].length < 12
-      if letter == name_first_letter
-        puts "#{i + 1} #{(hash[:name]).capitalize}, country of birth: #{(hash[:country_of_birth].capitalize)} (#{hash[:cohort]} cohort)"
-      end
+      if hash[:name].length < 12
+        if letter == name_first_letter
+          puts "#{i + 1} #{(hash[:name]).capitalize}, country of birth: #{(hash[:country_of_birth].capitalize)} (#{hash[:cohort]} cohort)"
+        end
 
-      if letter.empty?
-        puts "#{i + 1} #{(hash[:name]).capitalize}, country of birth: #{(hash[:country_of_birth].capitalize)} (#{hash[:cohort]} cohort)"
+        if letter.empty?
+          puts "#{i + 1} #{(hash[:name]).capitalize}, country of birth: #{(hash[:country_of_birth].capitalize)} (#{hash[:cohort]} cohort)"
+        end
       end
     end
   end
 end
 
-def print_footer(hash)
-  print "Overall, we have #{hash.count} great students"
+def print_footer(array)
+  if array.empty?
+    puts "No students here"
+  else
+    print "Overall, we have #{array.count} great students"
+  end
 end
 
 students = input_students
