@@ -6,38 +6,39 @@ def input_students
     puts "Please, enter the name of the student"
     puts "To finish, just hit return twice"
     name = gets.chomp
-
+      
     break if name.empty?
-
+    
+#-- TODO: ask the user for the kind of cathegory e.g. "which cathegory do you want? (DOB, hobby, cohort)" 
     puts "Please, enter the student's country of birth"
     country_of_birth = gets.chomp
+    if country_of_birth.empty?
+      country_of_birth = "* value not inserted *"
+    end
 
     puts "Please, enter the student's hobby"
     hobby = gets.chomp
+    if hobby.empty?
+      hobby = "* value not inserted *"
+    end
 
     puts "Please, enter the student's cohort"
     cohort = gets.chomp
+    if cohort.empty?
+      cohort = "* value not inserted *"
+    end
 
     students.push({name: name, country_of_birth: country_of_birth, hobby: hobby, cohort: cohort})
-    puts ("Now we have #{students.count} students").center(10)
+
+    if students.length == 1
+      puts "Now we have 1 student"
+    else
+      puts "Now we have #{students.count} students"
+    end
   end
 
   students
 end
-
-# students = [
-#   {name: "Doctor Hannibal Lecter", cohort: :november},
-#   {name: "Darth Vader", cohort: :november},
-#   {name: "Nurse Ratched", cohort: :november},
-#   {name: "Michael Corleone", cohort: :november},
-#   {name: "Alex DeLarge", cohort: :november},
-#   {name: "The Wicked Witch of the West", cohort: :november},
-#   {name: "Terminator", cohort: :november},
-#   {name: "Freddy Krueger", cohort: :november},
-#   {name: "The Joker", cohort: :november},
-#   {name: "Joffrey Baratheon", cohort: :november},
-#   {name: "Norman Bates", cohort: :november}
-# ]
 
 def print_header
   puts "The students of Villains Academy"
