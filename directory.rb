@@ -1,11 +1,18 @@
+@students = []
+
 def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
   puts "9. Exit"
 end
 
+def show_students
+  print_header
+  print_names(@students)
+  print_footer(@students)
+end
+
 def interactive_menu
-  students = []
   loop do 
     print_menu
     selection = gets.chomp
@@ -14,9 +21,7 @@ def interactive_menu
       when "1"
         students = input_students
       when "2"
-        print_header
-        print_names(students)
-        print_footer(students)
+        show_students
       when "9"
         exit
       else 
@@ -29,17 +34,13 @@ def input_students
   puts "Please, enter the name of the student"
   puts "To finish, just hit return twice"
 
-  students = []
-
   name = gets.chomp
 
   while !name.empty? do
-    students << {name: name, cohort: :november}
-    puts "Now we have #{students.count} students"
+    @students << {name: name, cohort: :november}
+    puts "Now we have #{@students.count} students"
     name = gets.chomp
   end
-
-  students
 end
 
 def print_header
@@ -54,7 +55,7 @@ def print_names(array)
 end
 
 def print_footer(hash)
-  print "Overall, we have #{hash.count} great students"
+  puts "Overall, we have #{hash.count} great students"
 end
 
 interactive_menu
