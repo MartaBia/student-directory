@@ -6,6 +6,19 @@ def print_menu
   puts "9. Exit"
 end
 
+def process(selection)
+  case selection
+  when "1"
+    students = input_students
+  when "2"
+    show_students
+  when "9"
+    exit
+  else 
+    puts "I don't kow what you mean, please try again"
+  end
+end
+
 def show_students
   print_header
   print_names(@students)
@@ -15,18 +28,7 @@ end
 def interactive_menu
   loop do 
     print_menu
-    selection = gets.chomp
-    
-    case selection
-      when "1"
-        students = input_students
-      when "2"
-        show_students
-      when "9"
-        exit
-      else 
-        puts "I don't kow what you mean, please try again"
-    end
+    process(gets.chomp)
   end 
 end
 
