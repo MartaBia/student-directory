@@ -3,6 +3,7 @@ def input_students
   students = []
 
   while true
+    puts "*********************".center(30)
     puts "Please, enter the name of the student"
     puts "To finish, just hit return twice"
     name = gets.chomp
