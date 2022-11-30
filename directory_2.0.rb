@@ -1,3 +1,4 @@
+
 def input_students
 
   students = []
@@ -10,17 +11,11 @@ def input_students
       
     break if name.empty?
     
-#-- TODO: ask the user for the kind of cathegory e.g. "which cathegory do you want? (DOB, hobby, cohort)" 
+    #-- TODO: ask the user for the kind of cathegory e.g. "which cathegory do you want? (DOB, hobby, cohort)" 
     puts "Please, enter the student's country of birth"
     country_of_birth = gets.chomp
     if country_of_birth.empty?
-      country_of_birth = "* value not inserted *"
-    end
-
-    puts "Please, enter the student's hobby"
-    hobby = gets.chomp
-    if hobby.empty?
-      hobby = "* value not inserted *"
+      country_of_birth = "*value not inserted*"
     end
 
     puts "Please, enter the student's cohort"
@@ -29,7 +24,7 @@ def input_students
       cohort = "* value not inserted *"
     end
 
-    students.push({name: name, country_of_birth: country_of_birth, hobby: hobby, cohort: cohort})
+    students.push({name: name, country_of_birth: country_of_birth, cohort: cohort})
 
     if students.length == 1
       puts "Now we have 1 student"
@@ -43,25 +38,30 @@ end
 
 def print_header
   puts "The students of Villains Academy"
-  puts "---------------------"
+  puts "---------------------".center(30)
 end
 
 def print_names(array)
   if !array.empty?
-    puts "Which letter would you like to search for?"
-    letter = gets.chomp.downcase
+    puts "Would you like to search names for a specific letter?"
+    puts "Write 'Yes' if you would, otherwise just hit return"
+    letter_search_answer = gets.chomp.downcase
+
+    if letter_search_answer == "yes"
+      puts "Which letter would you like to search for?"
+      letter = gets.chomp.downcase
+    end
 
     array.each_with_index do |hash, i|
       name_first_letter = (hash[:name])[0].downcase
 
-      if hash[:name].length < 12
-        if letter == name_first_letter
-          puts "#{i + 1} #{(hash[:name]).capitalize}, country of birth: #{(hash[:country_of_birth].capitalize)} (#{hash[:cohort]} cohort)"
-        end
-
-        if letter.empty?
-          puts "#{i + 1} #{(hash[:name]).capitalize}, country of birth: #{(hash[:country_of_birth].capitalize)} (#{hash[:cohort]} cohort)"
-        end
+    
+      if letter == name_first_letter
+        puts "- #{(hash[:name]).capitalize}, country of birth: #{(hash[:country_of_birth].capitalize)} (#{hash[:cohort].capitalize} cohort)"
+        
+      end
+      if letter_search_answer.empty?
+        puts "#{i + 1} #{(hash[:name]).capitalize}, country of birth: #{(hash[:country_of_birth].capitalize)} (#{hash[:cohort].capitalize} cohort)"
       end
     end
   end
@@ -71,7 +71,11 @@ def print_footer(array)
   if array.empty?
     puts "No students here"
   else
-    print "Overall, we have #{array.count} great students"
+    if array.length == 1
+      puts "We only have 1 (but great) student"
+    else
+      puts "Overall, we have #{array.count} great students"
+    end
   end
 end
 
