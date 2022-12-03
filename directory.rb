@@ -37,12 +37,16 @@ def process(selection)
   case selection
   when "1"
     students = input_students
+    puts "Students added succesfully!"
   when "2"
     show_students
   when "3"
     save_students
+    puts "Student saved succesfully!"
   when "4"
+    puts "Type file's name"
     load_students
+    puts "Student loaded succesfully!"
   when "9"
     exit
   else 
@@ -71,7 +75,8 @@ def print_footer(hash)
 end
 
 def save_students
-  file = File.open("students.csv", "w")
+  puts "Type the file's name"
+  file = File.open("#{STDIN.gets.chomp}.csv", "w")
   
   @students.each do |student|
     student_data = [student[:name], student[:cohort]]
@@ -81,7 +86,7 @@ def save_students
   file.close
 end
 
-def load_students(filename = "students.csv") #this is a default value, if no argument is passed then the value "students.csv" will be used instead
+def load_students(filename = "#{STDIN.gets.chomp}.csv") #this is a default value, if no argument is passed then the value "students.csv" will be used instead
   file = File.open(filename, "r")
 
   file.readlines.each do |line|
