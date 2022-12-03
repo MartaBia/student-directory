@@ -42,7 +42,7 @@ def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
   puts "3. Save the list to students.csv"
-  puts "4. load the list from students.csv"
+  # puts "4. load the list from students.csv"
   puts "9. Exit"
 end
 
@@ -56,9 +56,9 @@ def process(selection)
     when "3"
       save_students
       puts "Student saved succesfully!"
-    when "4"
-      load_students
-      puts "Student loaded succesfully!"
+    # when "4"
+    #   load_students
+    #   puts "Student loaded succesfully!"
     when "9"
       exit
     else 
@@ -142,4 +142,5 @@ def try_load_students
   end
 end
 
+load_students
 interactive_menu
