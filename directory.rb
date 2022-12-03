@@ -76,24 +76,42 @@ end
 
 def save_students
   puts "Type the file's name"
-  file = File.open("#{STDIN.gets.chomp}.csv", "w")
-  
-  @students.each do |student|
-    student_data = [student[:name], student[:cohort]]
-    csv_line = student_data.join(",")
-    file.puts csv_line
+  file = File.open("#{STDIN.gets.chomp}.csv", "w") do |f|
+    f.write 
+   
+    @students.each do |student|
+      student_data = [student[:name], student[:cohort]]
+      csv_line = student_data.join(",")
+      f.puts csv_line
+    end
   end
-  file.close
+
+  # -- FIRST VERSION: -------
+  # file = File.open("#{STDIN.gets.chomp}.csv", "w")
+  # @students.each do |student|
+  #   student_data = [student[:name], student[:cohort]]
+  #   csv_line = student_data.join(",")
+  #   file.puts csv_line
+  # end
+  # file.close
 end
 
 def load_students(filename = "#{STDIN.gets.chomp}.csv") #this is a default value, if no argument is passed then the value "students.csv" will be used instead
-  file = File.open(filename, "r")
+  
+  file = File.open(filename, "r") do |f|
+          f.readlines.each do |line|
+            name, cohort = line.chomp.split(',')
+            adding_students_to_array({name: name, cohort: cohort.to_sym})
+          end
+        end
 
-  file.readlines.each do |line|
-    name, cohort = line.chomp.split(',')
-    adding_students_to_array({name: name, cohort: cohort.to_sym})
-  end
-  file.close
+  # -- FIRST VERSION: -------      
+  # file = File.open(filename, "r")
+  # file.readlines.each do |line|
+  #   name, cohort = line.chomp.split(',')
+  #   adding_students_to_array({name: name, cohort: cohort.to_sym})
+  # end
+  # file.close
 end
 
 def adding_students_to_array(hash)
