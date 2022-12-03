@@ -1,3 +1,5 @@
+require 'csv'
+
 @students = []
 
 def input_students
@@ -42,7 +44,7 @@ def print_menu
   puts "1. Input the students"
   puts "2. Show the students"
   puts "3. Save the list to students.csv"
-  # puts "4. load the list from students.csv"
+  puts "4. load the list from students.csv"
   puts "9. Exit"
 end
 
@@ -56,9 +58,9 @@ def process(selection)
     when "3"
       save_students
       puts "Student saved succesfully!"
-    # when "4"
-    #   load_students
-    #   puts "Student loaded succesfully!"
+    when "4"
+      load_students
+      puts "Student loaded succesfully!"
     when "9"
       exit
     else 
@@ -106,34 +108,29 @@ end
 
 def save_students
   puts "Type the file's name"
-  file = File.open("#{STDIN.gets.chomp}.csv", "w") do |f|
-    f.write 
+  file = CSV.open("#{STDIN.gets.chomp}.csv", "w") do |csv|
    
     @students.each do |student|
-      student_data = [student[:name], student[:country_of_birth], student[:cohort]]
-      csv_line = student_data.join(",")
-      f.puts csv_line
+      csv << [student[:name], student[:country_of_birth], student[:cohort]]
     end
   end
 end
 
 def load_students(filename = "students.csv")
-  file = File.open(filename, "r") do |f|
-    f.readlines.each do |line|
-      name, country_of_birth, cohort = line.chomp.split(',')
-      @students.push({
-        name: name, 
-        country_of_birth: country_of_birth, 
-        cohort: cohort
+  file = CSV.foreach(filename) do |line|
+    
+    @students.push({
+      name: line[0], 
+      country_of_birth: line[1], 
+      cohort: line[2]
       })
-    end
   end
 end
 
 def try_load_students
   filename = ARGV.first
   return if filename.nil?
-  if File.exist?(filename)
+  if CSV.exist?(filename)
     load_students(filename)
     puts "Loaded #{@students.count} from #{filename}"
   else 
@@ -142,5 +139,4 @@ def try_load_students
   end
 end
 
-load_students
 interactive_menu
