@@ -1,13 +1,12 @@
 @students = []
 
 def input_students
-  puts "Please, enter the name of the student"
-  puts "To finish, just hit return twice"
+  print_input_students_header
 
   name = STDIN.gets.chomp
 
   while !name.empty? do
-    @students << {name: name, cohort: :november}
+    adding_students_to_array({name: name, cohort: :november.to_sym})
     puts "Now we have #{@students.count} students"
     name = STDIN.gets.chomp
   end
@@ -56,6 +55,11 @@ def print_header
   puts "---------------------"
 end
 
+def print_input_students_header
+  puts "Please, enter the name of the student"
+  puts "To finish, just hit return twice"
+end
+
 def print_student_list(array)
   array.each do |hash|
     puts "#{hash[:name]} (#{hash[:cohort]} cohort)"
@@ -82,9 +86,13 @@ def load_students(filename = "students.csv") #this is a default value, if no arg
 
   file.readlines.each do |line|
     name, cohort = line.chomp.split(',')
-    @students.push(name: name, cohort: cohort.to_sym)
+    adding_students_to_array({name: name, cohort: cohort.to_sym})
   end
   file.close
+end
+
+def adding_students_to_array(hash)
+  @students.push(hash)
 end
 
 def try_load_students
